@@ -1,0 +1,20 @@
+<div class="document-ui-content">
+  <div class="row no-margin">
+    <div sticky sticky-class="search-group-sticky" class="col-md-12 search-group">
+      <search-form></search-form>
+    </div>
+    <div class="col-md-10 document-ui-search-results" id="top-search">
+      <ul>
+        <li ng-repeat="result in vm.results.results">
+          <span class="search-item-number">{{result.order}}</span>
+          <h2><a ui-sref="{{result|routingFilter}}">{{result.title}}</a></h2>
+          <p class="document-ui-cut">{{result.snippet}}</p>
+          <span class="part-link">В разделе: <a ui-sref="{{result.section}}.all">{{result.section|sectionPlace}}</a></span>
+        </li>
+      </ul>
+      <div class="pagination-left">
+        <pagination></pagination>
+      </div>
+    </div>
+  </div>
+</div>

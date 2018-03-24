@@ -1,0 +1,40 @@
+# Storage Service Config
+
+# Storage API
+host: 'localhost'
+port: 9000
+
+# Rabbit MQ
+amqp_user: 'guest'
+amqp_password: 'guest'
+
+# Preview
+preview_format: 'jpg'
+preview_large: 'x1000'
+preview_normal: 'x700'
+preview_thumbnail: 'x180'
+
+
+# Watermark
+watermark_add: false
+watermark_font: 'ptsans-caption.ttf'
+watermark_message: 'Test'
+watermark_image_format: 'JPEG'
+
+# Seaweed FS
+seaweed_master_host: 'localhost'
+seaweed_master_port: 9333
+seaweed_filler_host: 'localhost'
+seaweed_filler_port: 8888
+seaweed_volume_host: 'localhost'
+seaweed_volume_port: 8080
+seaweed_data_dir: '../data'
+
+# PDF
+document_producer: 'Test'
+document_creator: 'Test'
+
+# Core API endpoint
+core_api_host: 'localhost'
+core_api_port: 8000
+core_api_update_document_url: 'api/document-update'

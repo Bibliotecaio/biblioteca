@@ -1,0 +1,182 @@
+<div class="document-ui-content">
+  <div class="row no-margin">
+    <div sticky sticky-class="search-group-sticky" class="col-md-9 search-group">
+      <search-form></search-form>
+    </div>
+    <div class="col-md-7 document-ui-book-list" id="top-search">
+      <ul>
+        <li ng-repeat="doc in vm.results.results">
+
+          <div class="col-sm-2 book-cover">
+            <document-cover img-id="{{doc.coverImage}}" alt="{{doc.title}}" title="{{doc.title}}" img-height="280"></document-cover>
+          </div>
+
+
+          <div class="col-sm-8 book-info">
+            <h2>{{doc.title}}</h2>
+            <dl>
+              <dt>№</dt>
+              <dd>
+                <abbr title="Номер документа в физическом архиве / Номер документа в системе"
+                      data-original-title="Номер документа в физическом архиве / Номер документа в системе">
+                      {{doc.documentNumber}}/{{doc.id}}
+                </abbr>
+              </dd>
+
+              <dt>Тип документа:</dt>
+              <dd><a href=""
+                     ng-click="vm.filterByParam('documentTypes', doc.documentType)">{{doc.documentType.name}}</a></dd>
+
+              <dt>Язык:</dt>
+              <dd><a href=""
+                     ng-click="vm.filterByParam('languages', doc.language)">{{doc.language.name}}</a></dd>
+
+              <dt>Тема документа:</dt>
+              <dd><a href=""
+                     ng-click="vm.filterByParam('subjects', doc.subject)">{{doc.subject.name}}</a></dd>
+            </dl>
+            <dl ng-hide="showme">
+              <dt class="book-description">Описание</dt>
+              <dd class="book-description">
+                {{doc.description | limitTo:100}}...
+                <a class="read-more" href="" ng-click="showme=true">Еще</a>
+              </dd>
+            </dl>
+            <dl ng-show="showme">
+              <dt class="book-description">Описание</dt>
+              <dd class="book-description">{{doc.description}}</dd>
+
+              <dt>Cтраниц:</dt>
+              <dd>{{doc.pageCount}} стр.</dd>
+
+              <dt class="book-description">Физическое описание</dt>
+              <dd class="book-description">{{doc.physicalDescription}}</dd>
+
+              <dt>Период создания:</dt>
+              <dd><a href=""
+                     ng-click="vm.filterByParam('timePeriods', doc.timePeriod)">{{doc.timePeriod.period}}</a></dd>
+
+              <dt>Авторы:</dt>
+              <dd><a class="m-r-sm"
+                     ng-repeat="author in doc.authors"
+                     href="" ng-click="vm.filterByParam('authors', author)">{{author.name}}</a>&nbsp;</dd>
+
+              <dt>Ключевые слова:</dt>
+              <dd><a class="m-r-sm"
+                     ng-repeat="keyword in doc.keywords"
+                     href="" ng-click="vm.filterByParam('keywords', keyword)">{{keyword.name}}</a>&nbsp;</dd>
+              <dt><a class="read-more" href="" ng-click="showme=false">Скрыть</a></dt>
+              <dd></dd>
+            </dl>
+            <a ui-sref="books.all.viewer({id: doc.id})"
+               target="_blank"
+               rel="nofollow noopener noreferrer"
+               class="btn btn-read btn-md">Читать</a>
+          </div>
+          <div class="clearfix"></div>
+        </li>
+      </ul>
+
+      <div class="pagination-left">
+        <pagination></pagination>
+      </div>
+
+    </div>
+    <div sticky sticky-class="document-ui-right-sidebar-sticky" class="col-md-3 document-ui-right-sidebar">
+      <div class="form-group">
+
+        <div class="col-sm-12">
+          <label class="radio-inline"> <input icheck type="radio" ng-model="vm.physicalPlace.place" value="library archive">
+            Все
+          </label>
+          <label class="radio-inline"> <input icheck type="radio" ng-model="vm.physicalPlace.place" value="library">
+            В Архиве
+          </label>
+          <label class="radio-inline"> <input icheck type="radio" ng-model="vm.physicalPlace.place" value="archive">
+            В Библиотеке
+          </label>
+        </div>
+      </div>
+
+      <div class="col-sm-12 document-ui-controls-group">
+        <label>Авторы</label>
+        <ui-select multiple ng-model="vm.selectedFilters.authors" theme="bootstrap"  ng-disabled="vm.disabled"" title="Выберите автора">
+          <ui-select-match placeholder="Выберите автора...">{{$item.name}}</ui-select-match>
+          <ui-select-choices repeat="author in vm.authors | propsFilter: {name: $select.search}">
+            <div ng-if="!author.isTag" ng-bind-html="author.name + author.isTag| highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+
+      <div class="col-sm-12 document-ui-controls-group">
+        <label>Временной период</label>
+        <ui-select multiple ng-model="vm.selectedFilters.timePeriods" theme="bootstrap" ng-disabled="vm.disabled"" title="Выберите временной период">
+          <ui-select-match placeholder="Выберите временной период...">{{$item.period}}</ui-select-match>
+          <ui-select-choices repeat="period in vm.timePeriods | propsFilter: {period: $select.search}">
+            <div ng-if="!period.isTag" ng-bind-html="period.period + period.isTag| highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+
+      <div class="col-sm-12 document-ui-controls-group">
+        <label>Тип документа</label>
+        <ui-select multiple ng-model="vm.selectedFilters.documentTypes" theme="bootstrap" ng-disabled="vm.disabled"" title="Выберите тип документа">
+          <ui-select-match placeholder="Выберите тип документа...">{{$item.name}}</ui-select-match>
+          <ui-select-choices repeat="type in vm.documentTypes | propsFilter: {name: $select.search}">
+            <div ng-if="!type.isTag" ng-bind-html="type.name + person.isTag| highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+
+      <div class="col-sm-12 document-ui-controls-group">
+        <label>Язык</label>
+        <ui-select multiple ng-model="vm.selectedFilters.languages" theme="bootstrap" ng-disabled="vm.disabled"" title="Выберите язык">
+          <ui-select-match placeholder="Выберите язык...">{{$item.name}}</ui-select-match>
+          <ui-select-choices repeat="language in vm.languages | propsFilter: {name: $select.search}">
+            <div ng-if="!language.isTag" ng-bind-html="language.name + language.isTag| highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+
+      <div class="col-sm-12 document-ui-controls-group">
+        <label>Тема</label>
+        <ui-select multiple ng-model="vm.selectedFilters.subjects" theme="bootstrap" ng-disabled="vm.disabled"" title="Выберите тему">
+          <ui-select-match placeholder="Выберите тему...">{{$item.name}}</ui-select-match>
+          <ui-select-choices repeat="subject in vm.subjects | propsFilter: {name: $select.search}">
+            <div ng-if="!subject.isTag" ng-bind-html="subject.name + subject.isTag| highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+
+      <div class="col-sm-12 document-ui-controls-group">
+        <label>Ключевые слова</label>
+        <ui-select multiple ng-model="vm.selectedFilters.keywords" theme="bootstrap" ng-disabled="vm.disabled"" title="Выберите ключевое слово">
+          <ui-select-match placeholder="Выберите ключевое слово...">{{$item.name}}</ui-select-match>
+          <ui-select-choices repeat="keyword in vm.keywords | propsFilter: {name: $select.search}">
+            <div ng-if="!keyword.isTag" ng-bind-html="keyword.name + keyword.isTag| highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+
+      <div class="col-sm-12 document-ui-controls-group">
+        <label>Алфавитный указатель</label>
+        <ui-select multiple ng-model="vm.selectedFilters.alphabetChars" theme="bootstrap" ng-disabled="vm.disabled"" title="Выберите букву">
+          <ui-select-match placeholder="Выберите букву...">{{$item.char}}</ui-select-match>
+          <ui-select-choices repeat="char in vm.alphabetChars | propsFilter: {char: $select.search}">
+            <div ng-if="!char.isTag" ng-bind-html="char.char + char.isTag| highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+      <div class="col-sm-12 document-ui-controls-group text-center btn-group">
+        <button class="btn document-ui-btn-primary col-sm-10" type="button" ng-click="vm.filterBooks()">
+          <i class="fa fa-check"></i>&nbsp;Отфильтровать
+        </button>
+        <button class="btn document-ui-btn-danger col-sm-2" type="button" title="Сбросить фильтры" ng-click="vm.clearFilters()">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+
+  </div>
+</div>

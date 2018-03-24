@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru"
+      ng-app="documentUI"
+      ng-controller="MainController as vm">
+      <!--manifest="/cache.manifest">-->
+
+  <head>
+    <base href="/">
+    <title page-title-directive></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Caption|PT+Sans+Narrow|PT+Sans:400,400i,700,700i|PT+Serif+Caption|PT+Serif:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!--Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
+
+    <!-- theme CSS -->
+    <link href="assets/animate.min.css" rel="stylesheet">
+    <link href="plugins/document-viewer/viewer-datauri.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="plugins/document-viewer/print.css" media="print" rel="stylesheet" type="text/css">
+
+    <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script><% }); %>
+
+    <!--Viewer-->
+    <script type="text/javascript" src="plugins/document-viewer/viewer.js"></script>
+    <script type="text/javascript" src="plugins/document-viewer/templates.js"></script>
+    <!--iCheck-->
+    <script type="text/javascript" src="plugins/iCheck/icheck.min.js"></script>
+  </head>
+  <body class="{{vm.bodyClass}}">
+    <toaster-container></toaster-container>
+
+    <div id="wrapper">
+      <div class="{{vm.containerClass}}">
+        <div ui-view="navigation"></div>
+          <div id="page-wrapper" class="{{vm.wrapperClass}} {{$state.current.name}}">
+            <div ui-view="topnavbar"></div>
+            <div ui-view="main"></div>
+            <div ui-view="footer"></div>
+          </div>
+        </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+log/*
+*.pid
+*~
+.#*
+.DS_Store
+raw
+.tm_properties
+/public/javascripts/DV/vendor/underscore
+/public/javascripts/DV/vendor/jquery-ui
+/public/javascripts/DV/vendor/jquery
