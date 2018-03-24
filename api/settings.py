@@ -27,7 +27,7 @@ SECRET_KEY = 'l-5y((3c4$rkntuab!30-y*aj%^ey*4zzv%w&cw8)jgp_y443l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'api.rpsc-biblio.ru']
+ALLOWED_HOSTS = ['localhost', 'web', 'api.rpsc-biblio.ru']
 
 ADMIN_SITE_HEADER = 'Управление архивом'
 ADMIN_SITE_TITLE = 'Управление архивом'
@@ -177,11 +177,11 @@ SEAWEEDFS_VOLUME_PORT = 8080
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'document_core_api',
-        'USER': 'document_core_api',
+        'NAME': 'biblioteca',
+        'USER': 'biblioteca',
         'PASSWORD': '123456',
-        'HOST': 'localhost',
-        'PORT': '',
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
 

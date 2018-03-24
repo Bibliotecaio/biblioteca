@@ -1,7 +1,8 @@
 PROJECT_DIR=$(shell pwd)
 VENV_DIR?=$(PROJECT_DIR)/.env
 PIP?=$(VENV_DIR)/bin/pip
-PYTHON?=$(VENV_DIR)/bin/python
+# PYTHON?=$(VENV_DIR)/bin/python
+PYTHON?=python
 MANAGE?=$(PROJECT_DIR)/manage.py
 CELERY?=$(VENV_DIR)/bin/celery
 LOGS_DIR?=$(PROJECT_DIR)/logs
@@ -38,7 +39,7 @@ logs_dir:
 	mkdir $(LOGS_DIR)
 
 create_admin:
-	echo "from users.models import User; User.objects.create_superuser('admin@example.com', '123456')" | $(PYTHON) manage.py shell
+	echo "from users.models import User; User.objects.filter(email='admin@example.com').exists() or User.objects.create_superuser('admin@example.com', '123456'); exit()" | $(PYTHON) manage.py shell
 
 run_api:
 	$(PYTHON) manage.py runserver localhost:8000

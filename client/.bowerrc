@@ -1,4 +1,5 @@
 {
+  "allow_root": true,
   "directory": "vendor",
   "json": "bower.json"
 }

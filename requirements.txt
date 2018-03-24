@@ -9,7 +9,7 @@ drf-nested-routers==0.11.1
 python-dateutil==2.6.0
 django-wysiwyg-redactor==0.5.0
 requests==2.12.3
-psycopg2==2.6.2
+psycopg2-binary
 pytz==2016.10
 pytils==0.3
 aiofiles==0.3.2
