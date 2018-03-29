@@ -1,6 +1,8 @@
 # Biblioteca
 
-## Installation
+Library engine
+
+## Standalone Installation
 
 ### Utils & Libs
 

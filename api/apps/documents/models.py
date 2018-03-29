@@ -14,17 +14,6 @@ __all__ = [
 ]
 
 
-"""
-
-3) Описание - краткое описание (например издательство, ISBN, кол-во страниц,...)
-5) Дата выпуска (год или век, если неизвестно)
-7) Место хранение - место+номер хранение (для рукописей и старопечатных книг)
-9) Ссылка на скачивание
-Издатель
-
-"""
-
-
 class TimePeriod(models.Model):
     begin_year = models.DateField(
         verbose_name='Год начала', blank=True, null=True)
@@ -174,35 +163,34 @@ class Document(AbstractPublishedModel):
 
     def to_json(self):
         return dict(
-            id='82753-lefler-thesis',
-            title="Lefler Thesis",
-            pages=129,
-            description="A Master's Thesis on the phenomenon of \"LOLSPEAK\" and its origin in image macros.",
+            id=self.id,
+            title=self.title,
+            pages=self.page_count,
+            description=self.description,
             source=None,
-            created_at="Tue, 10 Jan 2012 20:20:36 +0000",
-            updated_at="Fri, 09 Feb 2018 16:40:27 +0000",
-            canonical_url="http://localhost:8000",
+            created_at=self.creation_date,
+            updated_at=self.last_update_date,
+            canonical_url='',
             language="eng",
             file_hash=None,
-            contributor="Ted Han",
-            contributor_slug="2258-ted-han",
-            contributor_documents_url="http://localhost:8000/public/search/Account:2258-ted-han",
-            contributor_organization="DocumentCloud",
-            contributor_organization_slug="dcloud",
-            contributor_organization_documents_url="http://localhost:8000",
+            contributor='',
+            contributor_slug='',
+            contributor_documents_url='',
+            contributor_organization='',
+            contributor_organization_slug='',
+            contributor_organization_documents_url='',
             display_language="eng",
             resources={
-                "pdf": "https://assets.documentcloud.org/documents/282753/lefler-thesis.pdf",
-                "text": "https://assets.documentcloud.org/documents/282753/lefler-thesis.txt",
-                "thumbnail": "https://assets.documentcloud.org/documents/282753/pages/lefler-thesis-p1-thumbnail.gif",
-                "search": "https://www.documentcloud.org/documents/282753/search.json?q={query}",
-                "print_annotations": "https://www.documentcloud.org/notes/print?docs[]=282753",
-                "translations_url": "https://www.documentcloud.org/translations/{realm}/{language}",
-                "page": {
-                    "image": "https://assets.documentcloud.org/documents/282753/pages/lefler-thesis-p{page}-{size}.gif",
-                    "text": "https://www.documentcloud.org/documents/282753/pages/lefler-thesis-p{page}.txt"
+                'pdf': '',
+                'text': '',
+                'search': '',
+                'print_annotations':'',
+                'translations_url': '',
+                'page': {
+                    'image': '',
+                    'text': ''
                 },
-                "published_url": "http://localhost:8000"
+                'published_url': ''
             },
             sections=[],
             data={},

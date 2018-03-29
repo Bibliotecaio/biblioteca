@@ -3,6 +3,9 @@ from rest_framework.utils.urls import remove_query_param, replace_query_param
 
 
 class Pagination(object):
+    """
+    Custom pagination for client side
+    """
 
     def __init__(self, page, per_page, total_count, request):
         self.request = request

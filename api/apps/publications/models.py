@@ -22,6 +22,7 @@ class Publication(AbstractPublishedModel):
         return '%s %s' % (self.headline, self.date.strftime('%Y-%m-%d'))
 
 
+# FIXME fields handling
 @receiver(signals.pre_save, sender=Publication)
 def typofgraphy(sender, instance=None, created=False, **kwargs):
     #instance.headline = Typograph.typograph_text(instance.headline, 'ru')
