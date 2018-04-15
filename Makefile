@@ -8,10 +8,12 @@ LOGS_DIR?=$(PROJECT_DIR)/logs
 DATA_DIR?=$(PROJECT_DIR)/data
 STORAGE_DIR?=$(PROJECT_DIR)/storage
 CLIENT_DIR?=$(PROJECT_DIR)/client
+API_DIR?=$(PROJECT_DIR)/api
 
 .PHONY: all clean test run requirements install virtualenv grunt
 
-all: virtualenv install create_database migrate_db create_admin loaddata data_dir logs_dir
+all: virtualenv install create_local_settings create_database migrate_db create_admin data_dir logs_dir
+prod: virtualenv install create_local_settings create_database migrate_db collect_static data_dir logs_dir
 
 virtualenv:
 	virtualenv -p python3.6 $(VENV_DIR) --no-site-packages
@@ -21,6 +23,9 @@ install: requirements
 requirements:
 	$(PIP) install -U pip wheel setuptools
 	$(PIP) install -r $(PROJECT_DIR)/requirements.txt
+
+create_local_settings:
+	cp -n $(API_DIR)/settings.py.template $(API_DIR)/settings.py
 
 create_database:
 	sudo -u postgres psql -f ./install/db/create_db.sql

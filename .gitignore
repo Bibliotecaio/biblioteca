@@ -5,7 +5,6 @@ __pycache__/
 /os
 .env/
 env/
-data/
 pids/
 *.db
 .vagrant/
@@ -18,9 +17,11 @@ src/static/vendor
 .idea/
 *.log
 *.pyc
-settings_local.py
+settings.py
 *.pid
 *.sqlite3
 *.sw*
 *~
 /tmp.txt
+/api/settings.py
+/data/

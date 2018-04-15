@@ -4,6 +4,6 @@ from .views import SearchView
 
 
 urlpatterns = [
-    url(r'search/$', SearchView.as_view(), name='search'),
+    url(r'search/', SearchView.as_view(), name='search'),
 ]
 

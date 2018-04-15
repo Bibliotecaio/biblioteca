@@ -9,13 +9,8 @@ from django.db.models import Q
 from django.conf import settings
 from rest_framework.response import Response
 
-from publications.models import Publication
 from documents.models import Document
-
 from .paginators import Pagination
-
-
-from html.parser import HTMLParser
 
 
 class HTMLStripper(HTMLParser):
@@ -58,19 +53,6 @@ def _search_documents(query_list):
     return Document.published_objects.filter(queries)
 
 
-def _search_publications(query_list):
-    by_headline = reduce(
-        operator.or_, (Q(headline__icontains=q) for q in query_list))
-    by_text = reduce(
-        operator.or_, (Q(text__icontains=q) for q in query_list))
-
-    queries = Q()
-    queries.add(by_headline, Q.OR)
-    queries.add(by_text, Q.OR)
-
-    return Publication.published_objects.filter(queries)
-
-
 def _search_item(item_dict, section):
     title = ''
     snippet = ''
@@ -95,13 +77,9 @@ def _search(query_str):
 
     document_list = list(
         _search_documents(query_list).values('id', 'title', 'description'))
-    publication_list = list(
-        _search_publications(query_list).values('id', 'headline', 'text'))
 
     document_results = [_search_item(i, 'books') for i in document_list]
-    publication_results = [_search_item(i, 'publications') for i in publication_list]
-
-    results_list = document_results + publication_results
+    results_list = document_results
 
     count = 1
     for item in results_list:
@@ -112,7 +90,7 @@ def _search(query_str):
 
 def _grouper(n, iterable, fillvalue=None):
     """
-    grouper(3, 'ABCDEFG', 'x') --> ABC DEF Gxx
+    _grouper(3, 'ABCDEFG', 'x') --> ABC DEF Gxx
     """
     args = [iter(iterable)] * n
     return itertools.zip_longest(fillvalue=fillvalue, *args)

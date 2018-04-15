@@ -1,14 +1,11 @@
 from django.db import models
-from django.dispatch import receiver
 from django.db.models.signals import post_save
 
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
-from django.template import Context
 from django.conf import settings
 
-from rest_framework.authtoken.models import Token
 
 ADMIN = 'admin'
 EDITOR = 'editor'
@@ -111,13 +108,11 @@ class User(AbstractBaseUser):
     def post_save(sender, instance, created, *args, **kwargs):
         if created:
             template = get_template('users/mail/letter.html')
-
-            context = Context({
+            context = {
                 'name': instance.full_name,
                 'login': instance.short_name,
                 'password': instance.password
-            })
-
+            }
             to, from_email = instance.email, settings.DEFAULT_FROM_EMAIL
             content = template.render(context)
             msg = EmailMultiAlternatives(
@@ -128,10 +123,3 @@ class User(AbstractBaseUser):
 
 
 post_save.connect(sender=User, receiver=User.post_save)
-
-
-@receiver(post_save, sender=User)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
-    if created:
-        Token.objects.create(user=instance)
-

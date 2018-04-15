@@ -108,13 +108,17 @@ class Document(AbstractPublishedModel):
         choices=PHYSICAL_PLACE, default='ARCHIVE', max_length=100,
         verbose_name='Место размещения')
     language = models.ForeignKey(
-        'Language', verbose_name='Язык документа', null=True, blank=True)
+        'Language', verbose_name='Язык документа', null=True, blank=True,
+        on_delete=models.DO_NOTHING)
     time_period = models.ForeignKey(
-        'TimePeriod', verbose_name='Временной период', null=True, blank=True)
+        'TimePeriod', verbose_name='Временной период', null=True, blank=True,
+        on_delete=models.DO_NOTHING)
     document_type = models.ForeignKey(
-        'DocumentType', verbose_name='Тип документа', null=True, blank=True)
+        'DocumentType', verbose_name='Тип документа', null=True, blank=True,
+        on_delete=models.DO_NOTHING)
     subject = models.ForeignKey(
-        'Subject', verbose_name='Тема документа', null=True, blank=True)
+        'Subject', verbose_name='Тема документа', null=True, blank=True,
+        on_delete=models.DO_NOTHING)
     description = models.TextField(verbose_name='Описание',  blank=True)
     file_type = models.CharField(
         verbose_name='Тип файла', max_length=10, blank=True)
