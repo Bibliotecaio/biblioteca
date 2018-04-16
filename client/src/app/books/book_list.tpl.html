@@ -23,17 +23,28 @@
                 </abbr>
               </dd>
 
-              <dt>Тип документа:</dt>
-              <dd><a href=""
-                     ng-click="vm.filterByParam('documentTypes', doc.documentType)">{{doc.documentType.name}}</a></dd>
+              <div ng-if='doc.documentType.name'>
+                <dt>Тип документа:</dt>
+                <dd>
+                  <a href=""
+                     ng-click="vm.filterByParam('documentTypes', doc.documentType)">{{doc.documentType.name }}
+                  </a>
+                </dd>
+              </div>
 
-              <dt>Язык:</dt>
-              <dd><a href=""
-                     ng-click="vm.filterByParam('languages', doc.language)">{{doc.language.name}}</a></dd>
+              <div ng-if='doc.language.name'>
+                <dt>Язык:</dt>
+                <dd><a href=""
+                       ng-click="vm.filterByParam('languages', doc.language)">{{doc.language.name}}
+                  </a>
+                </dd>
+              </div>
 
-              <dt>Тема документа:</dt>
-              <dd><a href=""
-                     ng-click="vm.filterByParam('subjects', doc.subject)">{{doc.subject.name}}</a></dd>
+              <div ng-if='doc.subject.name'>
+                <dt>Тема документа:</dt>
+                <dd><a href=""
+                       ng-click="vm.filterByParam('subjects', doc.subject)">{{doc.subject.name}}</a></dd>
+              </div>
             </dl>
             <dl ng-hide="showme">
               <dt class="book-description">Описание</dt>
@@ -42,6 +53,7 @@
                 <a class="read-more" href="" ng-click="showme=true">Еще</a>
               </dd>
             </dl>
+
             <dl ng-show="showme">
               <dt class="book-description">Описание</dt>
               <dd class="book-description">{{doc.description}}</dd>
@@ -49,22 +61,33 @@
               <dt>Cтраниц:</dt>
               <dd>{{doc.pageCount}} стр.</dd>
 
-              <dt class="book-description">Физическое описание</dt>
-              <dd class="book-description">{{doc.physicalDescription}}</dd>
+              <div ng-if='doc.physicalDescription'>
+                <dt class="book-description">Физическое описание</dt>
+                <dd class="book-description">{{doc.physicalDescription}}</dd>
+              </div>
 
-              <dt>Период создания:</dt>
-              <dd><a href=""
-                     ng-click="vm.filterByParam('timePeriods', doc.timePeriod)">{{doc.timePeriod.period}}</a></dd>
+              <div ng-if='doc.timePeriod.period'>
+                <dt>Период создания:</dt>
+                <dd><a href=""
+                       ng-click="vm.filterByParam('timePeriods', doc.timePeriod)">{{doc.timePeriod.period}}</a></dd>
+              </div>
 
-              <dt>Авторы:</dt>
-              <dd><a class="m-r-sm"
-                     ng-repeat="author in doc.authors"
-                     href="" ng-click="vm.filterByParam('authors', author)">{{author.name}}</a>&nbsp;</dd>
+              <div ng-if='doc.authors.length > 0'>
+                <dt>Авторы:</dt>
+                <dd><a class="m-r-sm"
+                       ng-repeat="author in doc.authors"
+                       href=""
+                       ng-click="vm.filterByParam('authors', author)">{{author.name}}</a>
+                </dd>
+              </div>
 
-              <dt>Ключевые слова:</dt>
-              <dd><a class="m-r-sm"
-                     ng-repeat="keyword in doc.keywords"
-                     href="" ng-click="vm.filterByParam('keywords', keyword)">{{keyword.name}}</a>&nbsp;</dd>
+              <div ng-if='doc.keywords.length > 0'>
+                <dt>Ключевые слова:</dt>
+                <dd><a class="m-r-sm"
+                       ng-repeat="keyword in doc.keywords"
+                       href=""
+                       ng-click="vm.filterByParam('keywords', keyword)">{{keyword.name}}</a>&nbsp;</dd>
+              </div>
               <dt><a class="read-more" href="" ng-click="showme=false">Скрыть</a></dt>
               <dd></dd>
             </dl>

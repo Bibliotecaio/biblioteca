@@ -119,7 +119,7 @@ class Document(AbstractPublishedModel):
     subject = models.ForeignKey(
         'Subject', verbose_name='Тема документа', null=True, blank=True,
         on_delete=models.DO_NOTHING)
-    description = models.TextField(verbose_name='Описание',  blank=True)
+    description = models.TextField(verbose_name='Описание')
     file_type = models.CharField(
         verbose_name='Тип файла', max_length=10, blank=True)
     producer = models.CharField(

@@ -5,7 +5,6 @@ angular.module('documentUI', [
   'documentUI.menus',
   'documentUI.home',
   'documentUI.books',
-  'documentUI.publications',
   'documentUI.search',
   'angular-clear-button',
   'LocalStorageModule',

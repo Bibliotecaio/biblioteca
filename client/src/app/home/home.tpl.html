@@ -1,43 +1,6 @@
 
 <div class="document-ui-content">
   <div class="row no-margin">
-    <div class="col-md-12 document-ui-banner">
-      <div class="document-ui-banner-top-oval"></div>
-
-        <div class="documents-refresh" ng-click="vm.reloadRandom('library archive')"></div>
-        <div class="document-ui-book-controls">
-          <ul>
-            <li ng-class="{active: vm.physicalPlace.place === 'archive'}" ng-click="vm.getRandom('archive')">В Архиве</li>
-            <li ng-class="{active: vm.physicalPlace.place === 'library'}" ng-click="vm.getRandom('library')">В Библиотеке</li>
-            <!--<li ng-class="{active: vm.physicalPlace.place === 'library archive'}" ng-click="vm.getRandom('library archive')">Всё</li>-->
-          </ul>
-        </div>
-
-      <div class="document-ui-book-container">
-        <div class="row document-ui-book-row"
-             ng-repeat="documentsGroup in vm.randomDocuments | chunkBy:5">
-          <div class="col-md-2 document-ui-book-col" ng-repeat="doc in documentsGroup">
-
-            <div class="document-ui-book-item">
-
-              <div class="document-ui-book-cover">
-                <div class="document-ui-book-description">
-                  <span class="document-ui-book-description-type">{{doc.documentType.name}}</span><br>
-                  <span class="book-type">{{doc.physicalPlace|document_place}}</span><br>
-                  <span class="document-ui-book-description-title"><a ui-sref="books.all({id: doc.id})">{{doc.title | limitTo:15}}...</a></span>
-
-                </div>
-                <a ui-sref="books.all({id: doc.id})">
-                  <document-cover img-id="{{doc.coverImage}}" alt="{{doc.title}}" title="{{doc.title}}"  img-height="300"></document-cover>
-                </a>
-              </div>
-            </div>
-
-          </div>
-          </div>
-        </div>
-      </div>
-
     <div class="col-md-6 document-ui-text">
       <ul ng-repeat="publication in vm.publications">
         <li>
@@ -46,27 +9,6 @@
           <span class="document-ui-events-date">{{publication.date|amDateFormat:'DD MMMM YYYY г.'}}</span>
         </li>
       </ul>
-    </div>
-    <div class="col-md-5 document-ui-about">
-      <div class="document-ui-about-logo"><img src="assets/images/logo-small.svg"/></div>
-      <h3>О музейно-библиотечно-архивном отделе</h3>
-      <p>Весной 2004 года в составе Московской митрополии РПСЦ был
-        создан информационно-издательский отдел. В его задачи помимо
-        освещения текущих событий в церковных СМИ, вошли задачи
-        ознакомления как собственно церкви, так и современного общества
-        с историей и культурой старообрядчества на базе богатейших собраний
-        памятников православного искусства, книжности и документальных памятников.</p>
-      <p>С этой целью внутри отдела были созданы архив и библиотека редких
-        книги и рукописей<span style="margin-right:0.3em;"> </span><span style="margin-left:-0.3em;">(</span>тогда — «книгохранилище»).
-        С самого начала отдел поводил работу по подготовке выставок
-        на базе памятников, принадлежащих церкви. Однако, тогда же
-        стало ясно, что архив и библиотека — самостоятельные направления.
-        Они в 2005 году были объединены в самостоятельный отдел — «архивно-библиотечный».
-        В 2014 году отдел был преобразован в «музейно-библиотечно-архивный отдел»,
-        закономерно объединив в единое целое все ресурсы и направления работ
-        по созданию единого музейно-библиотечно-архивного пространства
-        Русской Православной Старообрядческой Церкви.</p>
-      <fb-page></fb-page>
     </div>
 
   </div>

@@ -13,8 +13,8 @@ angular.module('documentUI.home', [
           templateUrl: 'views/header.tpl.html'
         },
         'main@': {
-          templateUrl: 'home/home.tpl.html',
-          controller: 'HomeController as vm',
+          templateUrl: 'books/book_list.tpl.html',
+          controller: 'BookListController as vm',
         },
         'footer@':  {
           templateUrl: 'views/footer-min.tpl.html'
