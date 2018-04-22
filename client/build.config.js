@@ -24,7 +24,7 @@ module.exports = {
     name: 'production',
     apiEndpoint: 'https://api.kniznica.ru',
     fileStorageEndpoint: 'https://storage.kniznica.ru',
-    fillerStorageEndpoint: 'https://filer.kniznica.ru',
+    fillerStorageEndpoint: 'https://storage.kniznica.ru/files',
     uploadMimeTypes: [
       'application/pdf'
     ]
