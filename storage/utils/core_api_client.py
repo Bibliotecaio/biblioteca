@@ -30,7 +30,7 @@ def update_document(host, port, url, message_dict):
         if response.status_code != 200:
             sentry_client(
                 'API Error: CODE %d, CONTENT: %s' % (
-                    response.status_code, str(response.json()))
+                    response.status_code, str(response.content))
             )
     except Exception as e:
         sentry_client(e)
