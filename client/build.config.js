@@ -12,9 +12,6 @@ module.exports = {
 
   devEnv: {
     name: 'development',
-    //apiEndpoint: 'https://api.rpsc-biblio.ru',
-    //fileStorageEndpoint: 'https://storage.rpsc-biblio.ru',
-    //fillerStorageEndpoint: 'https://filer.rpsc-biblio.ru',
     apiEndpoint: 'http://localhost:8000',
     fileStorageEndpoint: 'http://localhost:9333',
     fillerStorageEndpoint: 'http://localhost:8888',
@@ -25,9 +22,9 @@ module.exports = {
 
   prodEnv: {
     name: 'production',
-    apiEndpoint: 'https://api.rpsc-biblio.ru',
-    fileStorageEndpoint: 'https://storage.rpsc-biblio.ru',
-    fillerStorageEndpoint: 'https://filer.rpsc-biblio.ru',
+    apiEndpoint: 'https://api.kniznica.ru',
+    fileStorageEndpoint: 'https://storage.kniznica.ru',
+    fillerStorageEndpoint: 'https://filer.kniznica.ru',
     uploadMimeTypes: [
       'application/pdf'
     ]
