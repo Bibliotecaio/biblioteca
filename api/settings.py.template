@@ -6,6 +6,8 @@ PRJ_ROOT = os.path.normpath(os.path.dirname(__file__))
 
 DEBUG = True
 
+ALLOWED_HOSTS = ['localhost']
+
 # Database
 DATABASES = {
     'default': {
