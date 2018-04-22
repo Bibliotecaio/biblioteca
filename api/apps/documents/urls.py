@@ -28,7 +28,7 @@ router.register(r'documents', DocumentViewSet, base_name='documents')
 urlpatterns = [
     url(r'', include(router.urls)),
     url(r'document-update/(?P<document_uuid>[\w-]+)/$', DocumentUpdateViewSet.as_view({'put': 'update', 'get': 'retrieve'}), name='document_update'),
-    url(r'document-viewer/(?P<document_id>[\d-]+).json$', DocumentViewerView.as_view(), name='document_viewer'),
+    url(r'document-viewer/(?P<document_id>[\d-]+)/$', DocumentViewerView.as_view(), name='document_viewer'),
     url(r'storage-info/$', StorageInfoView.as_view(), name='storage_info'),
     url(r'initial-filters/$', SearchFilterInitialView.as_view({'get': 'list'}), name='initial_filters'),
 ]

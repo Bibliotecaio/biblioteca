@@ -76,6 +76,7 @@ class DocumentSerializer(serializers.ModelSerializer):
             'language',
             'time_period',
             'is_document_processed',
+            'download_link',
         )
 
 
@@ -105,7 +106,8 @@ class DocumentListSerializer(serializers.ModelSerializer):
             'document_type',
             'keywords',
             'language',
-            'time_period'
+            'time_period',
+            'download_link'
         )
 
 

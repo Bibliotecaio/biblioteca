@@ -1,9 +1,11 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.postgres.fields import JSONField
 
-from core.models import AbstractPublishedModel
 
+from core.models import AbstractPublishedModel
 from .managers import RandomManager, PublishedByDateManager
+
 
 __all__ = [
     'Language',
@@ -119,7 +121,7 @@ class Document(AbstractPublishedModel):
     subject = models.ForeignKey(
         'Subject', verbose_name='Тема документа', null=True, blank=True,
         on_delete=models.DO_NOTHING)
-    description = models.TextField(verbose_name='Описание')
+    description = models.TextField(verbose_name='Описание документа', blank=True)
     file_type = models.CharField(
         verbose_name='Тип файла', max_length=10, blank=True)
     producer = models.CharField(
@@ -165,7 +167,62 @@ class Document(AbstractPublishedModel):
         verbose_name = 'Документ'
         verbose_name_plural = 'Документы'
 
+    @property
+    def download_link(self):
+        return '{host}:{port}/{uuid}/{filename}'.format(
+            host=settings.SEAWEEDFS_FILLER_HOST,
+            port=settings.SEAWEEDFS_FILLER_PORT,
+            uuid=self.document_uuid,
+            filename=self.document_file_original,
+        )
+
+    @property
+    def preview_images(self):
+        return '{host}:{port}/{uuid}/{uuid}-p{{page}}-{{size}}.{ex}'.format(
+            host=settings.SEAWEEDFS_FILLER_HOST,
+            port=settings.SEAWEEDFS_FILLER_PORT,
+            uuid=self.document_uuid,
+            ex=settings.PREVIEW_IMAGE_FORMAT,
+        )
+
     def to_json(self):
+        """
+        {
+            "id": "82753-lefler-thesis",
+            "title": "Приходской листок",
+            "pages": 129,
+            "description": "A Master's Thesis on the phenomenon of \"LOLSPEAK\" and its origin in image macros.",
+            "source": null,
+            "created_at": "Tue, 10 Jan 2012 20:20:36 +0000",
+            "updated_at": "Fri, 09 Feb 2018 16:40:27 +0000",
+            "canonical_url": "https://www.documentcloud.org/documents/282753-lefler-thesis.html",
+            "language": "ru",
+            "file_hash": null,
+            "contributor": "Ted Han",
+            "contributor_slug": "2258-ted-han",
+            "contributor_documents_url": "https://www.documentcloud.org/public/search/Account:2258-ted-han",
+            "contributor_organization": "Foo",
+            "contributor_organization_slug": "dcloud",
+            "contributor_organization_documents_url": "https://www.documentcloud.org/public/search/Group:dcloud",
+            "display_language": "ru",
+            "resources": {
+                "pdf": "https://assets.documentcloud.org/documents/282753/lefler-thesis.pdf",
+                "text": "https://assets.documentcloud.org/documents/282753/lefler-thesis.txt",
+                "thumbnail": "https://assets.documentcloud.org/documents/282753/pages/lefler-thesis-p1-thumbnail.gif",
+                "search": "https://www.documentcloud.org/documents/282753/search.json?q={query}",
+                "print_annotations": "https://www.documentcloud.org/notes/print?docs[]=282753",
+                "translations_url": "https://www.documentcloud.org/translations/{realm}/{language}",
+                "page": {
+                    "image": "https://assets.documentcloud.org/documents/282753/pages/lefler-thesis-p{page}-{size}.gif",
+                    "text": "https://www.documentcloud.org/documents/282753/pages/lefler-thesis-p{page}.txt"
+                },
+                "published_url": "https://www.documentcloud.org/documents/282753-lefler-thesis.html"
+            },
+            "sections": [],
+            "data": {},
+            "annotations": []
+        };
+        """
         return dict(
             id=self.id,
             title=self.title,
@@ -185,14 +242,12 @@ class Document(AbstractPublishedModel):
             contributor_organization_documents_url='',
             display_language="eng",
             resources={
-                'pdf': '',
-                'text': '',
+                'pdf': self.download_link,
                 'search': '',
                 'print_annotations':'',
                 'translations_url': '',
                 'page': {
-                    'image': '',
-                    'text': ''
+                    'image': self.preview_images,
                 },
                 'published_url': ''
             },

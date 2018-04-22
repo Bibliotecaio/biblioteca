@@ -9,10 +9,10 @@ amqp_user: 'guest'
 amqp_password: 'guest'
 
 # Preview
-preview_format: 'jpg'
-preview_large: 'x1000'
-preview_normal: 'x700'
-preview_thumbnail: 'x180'
+preview_format: 'gif'
+preview_large: '1000x'
+preview_normal: '700x'
+preview_small: '180x'
 
 
 # Watermark

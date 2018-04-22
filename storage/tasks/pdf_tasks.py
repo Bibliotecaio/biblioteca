@@ -39,7 +39,7 @@ def split_document(message):
     _sizes = dict(
         large=CONFIG['preview_large'],
         normal=CONFIG['preview_normal'],
-        thumbnail=CONFIG['preview_thumbnail']
+        small=CONFIG['preview_small']
     )
     _format = CONFIG['preview_format']
 

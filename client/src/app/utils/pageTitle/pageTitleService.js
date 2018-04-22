@@ -5,7 +5,7 @@ angular.module('pageTitleService', [
   function pageTitleService($rootScope, $state) {
     
     this._constructTitle = function (title) {
-      let suffix = '| Музейно-Библиотечно-Архивный отдел Московской митрополии РПСЦ';
+      let suffix = '| Biblioteca.io';
 
       if ($state.current.name.indexOf('admin') >= 0) {
         return `${ title } | Администрирование ${ suffix }`;

@@ -37,7 +37,7 @@ def _rename_files_list(root_path, sizes, docname, ex, splited_path) -> list:
     def _dir(path):
         size = {v: k for k, v in sizes.items()}[os.path.split(path)[-1]]
         files = _sort_files(os.listdir(path))
-        c = 0
+        c = 1
         for f in files:
             os.rename(
                 os.path.join(path, f),
@@ -60,7 +60,7 @@ def split_pdf(pdf_path, splited_path, sizes, ex) -> list:
     Split pdf document to images
 
     :param pdf_path: input pdf path
-    :param sizes: dict of stings as {'thumbnail': 'x180', 'normal': 'x700', 'large': 'x1000'}
+    :param sizes: dict of stings as {'small': 'x180', 'normal': 'x700', 'large': 'x1000'}
     :param ex: str as 'jpg'
     :return: list of img paths as ['/tmp/5566/0000.jpg', '/tmp/5566/0001.jpg',]
 

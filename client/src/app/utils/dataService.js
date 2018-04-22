@@ -5,12 +5,10 @@ angular.module('dataService', [
 .factory('dataService',
   function dataService($resource, ENV) {
     return {
-      login: $resource(
-        `${ ENV.apiEndpoint }/api/login/`),
-      logout: $resource(
-        `${ ENV.apiEndpoint }/api/logout/`),
       documents: $resource(
         `${ ENV.apiEndpoint }/api/documents/:id/`),
+      documentViewer: $resource(
+        `${ ENV.apiEndpoint }/api/document-viewer/:id/`),
       randomDocuments: $resource(
         `${ ENV.apiEndpoint }/api/documents-random/`),
       addDocument: $resource(
