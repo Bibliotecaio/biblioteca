@@ -23,7 +23,7 @@ angular.module('documentUI', [
             $httpProvider, $resourceProvider, $locationProvider,
             localStorageServiceProvider) {
     
-    //$locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
     $resourceProvider.defaults.stripTrailingSlashes = false;
     $urlMatcherFactoryProvider.strictMode(false);
     $urlRouterProvider.otherwise('/');
