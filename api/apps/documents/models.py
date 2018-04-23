@@ -169,18 +169,16 @@ class Document(AbstractPublishedModel):
 
     @property
     def download_link(self):
-        return '{host}:{port}/{uuid}/{filename}'.format(
-            host=settings.SEAWEEDFS_FILLER_HOST,
-            port=settings.SEAWEEDFS_FILLER_PORT,
+        return '{url}/{uuid}/{filename}'.format(
+            url=settings.SEAWEEDFS_FILLER_URL,
             uuid=self.document_uuid,
             filename=self.document_file_original,
         )
 
     @property
     def preview_images(self):
-        return '{host}:{port}/{uuid}/{uuid}-p{{page}}-{{size}}.{ex}'.format(
-            host=settings.SEAWEEDFS_FILLER_HOST,
-            port=settings.SEAWEEDFS_FILLER_PORT,
+        return '{url}/{uuid}/{uuid}-p{{page}}-{{size}}.{ex}'.format(
+            url=settings.SEAWEEDFS_FILLER_URL,
             uuid=self.document_uuid,
             ex=settings.PREVIEW_IMAGE_FORMAT,
         )
